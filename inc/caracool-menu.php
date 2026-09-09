@@ -77,13 +77,23 @@ if ( ! function_exists( 'caracool_menu_padre' ) ) {
 	 * no lo recolorea WordPress al pasar por encima ni al estar activo, así
 	 * que se queda quieto: es el precio de llevar la marca de la casa en vez
 	 * de un dashicon.
+	 *
+	 * El viewBox es cuadrado (101x101) a propósito, aunque el trazo real de
+	 * la C solo ocupa un ~39% del ancho: WordPress escala los iconos de menú
+	 * a un ancho fijo de 20px dejando la altura libre ("background-size:
+	 * 20px auto"), así que un viewBox mucho más alto que ancho (el trazo
+	 * real mide 39x97) se renderiza más alto que el hueco del icono en la
+	 * barra lateral (~34px) y se sale por arriba y por abajo. Centrando el
+	 * trazo en un lienzo cuadrado, WordPress lo escala a 20x20 y cabe
+	 * entero — se ve más pequeña que si ocupara todo el ancho, pero sin
+	 * recortes.
 	 */
 	function caracool_menu_icono() {
 		$c = 'M39.23,9.44c0,4.65-.8,7.71-2.13,9.98-1.6-1.2-3.99-2.26-6.92-2.26-7.58,0-14.5,6.92-14.5,35.91,'
 			. '0,23.14,2.93,30.06,10.37,30.06,4.12,0,7.85-.67,10.37-2,1.06,2.26,2,5.59,2,10.37,0,3.86-6.12,'
 			. '8.25-14.1,8.25-15.16,0-24.34-3.99-24.34-45.49C0,10.64,14.63,2.66,26.6,2.66c11.31,0,12.64,3.86,12.64,6.78';
 
-		$svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-6 0 52 101">'
+		$svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="-30.89 0 101 101">'
 			. '<path d="' . $c . '" fill="#a7aaad"/></svg>';
 
 		return 'data:image/svg+xml;base64,' . base64_encode( $svg ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions
