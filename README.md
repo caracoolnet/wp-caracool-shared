@@ -12,13 +12,17 @@ idénticos, byte a byte, en cada uno.
   demás se cuelgan de él como submenús, en cualquier orden y con cualquier
   combinación instalada. Ningún plugin depende de los demás: si es el único
   instalado, sigue funcionando igual, creando él mismo el menú padre.
-- `inc/caracool-actualizador.php` — el actualizador común. Con la licencia de
-  la web (Caracool → Licencia, o la constante `CARACOOL_LICENCIA`) pregunta a
-  Caracool Central (updates.caracool.net), que es quien baja el zip de GitHub;
-  así los repositorios pueden ser privados. Sin licencia, pregunta a GitHub
-  como antes. Cada plugin lo registra con `caracool_actualizador( array(
-  'archivo', 'slug', 'version', 'repo', 'nombre', 'resumen' ) )`; ver la
-  cabecera del archivo.
+- `inc/caracool-actualizador.php` — el actualizador común (1.1.0). Con la
+  licencia de la web (Caracool → Licencia, o la constante `CARACOOL_LICENCIA`)
+  pregunta a Caracool Central (updates.caracool.net), que es quien baja el zip
+  de GitHub; así los repositorios pueden ser privados. Sin licencia, pregunta
+  a GitHub como antes. Antes de instalar, comprueba la firma del zip (el
+  `.sig` que va al lado en cada release) con la clave pública de publicación
+  de Caracool: una versión sin firma, o con el zip cambiado, no se instala.
+  Cada plugin lo registra con `caracool_actualizador_v2( array( 'archivo',
+  'slug', 'version', 'repo', 'nombre', 'resumen' ) )`; ver la cabecera del
+  archivo. (La 1.0.0 usaba `caracool_actualizador()` y no comprobaba firmas;
+  las dos pueden convivir en una misma web mientras se actualiza todo.)
 
 ## Cómo se usa
 
